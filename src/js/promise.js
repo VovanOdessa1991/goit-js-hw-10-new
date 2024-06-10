@@ -1,3 +1,7 @@
+import iziToast from 'izitoast';
+// Додатковий імпорт стилів
+import 'izitoast/dist/css/iziToast.min.css';
+
 const form = document.querySelector('.form');
 
 console.log(form);
@@ -24,9 +28,21 @@ function createPromise(delay, state) {
     setTimeout(() => {
       if (state == 'fulfilled') {
         console.log('resolve');
+        iziToast.success({
+          title: 'resolve',
+          message: delay + ' ms',
+        });
         resolve('delay');
-      } else console.log('reject');
-      reject(delay);
+      } else {
+        iziToast.error({
+          title: '❌  reject',
+          message: delay + ' ms',
+          icon: `❌`,
+          iconColor: 'red',
+        });
+        console.log('reject');
+        reject(delay);
+      }
     }, delay);
   });
   //   return promise;
