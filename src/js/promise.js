@@ -19,8 +19,20 @@ function handleFormSubmit(event) {
   //   promise.then(console.log('THEN!!')).catch(console.log('CATCH!!'));
   // !!! чомусь спрацьовують, кетчь ругаеться!
   createPromise(delay, state)
-    .then(console.log('THEN!!'))
-    .catch(console.log('CATCH!!'));
+    .then(() =>
+      iziToast.success({
+        title: 'resolve',
+        message: delay + ' ms',
+      })
+    )
+    .catch(() =>
+      iziToast.error({
+        title: '❌  reject',
+        message: delay + ' ms',
+        icon: `❌`,
+        iconColor: 'red',
+      })
+    );
 }
 
 function createPromise(delay, state) {
@@ -28,18 +40,9 @@ function createPromise(delay, state) {
     setTimeout(() => {
       if (state == 'fulfilled') {
         console.log('resolve');
-        iziToast.success({
-          title: 'resolve',
-          message: delay + ' ms',
-        });
+
         resolve('delay');
       } else {
-        iziToast.error({
-          title: '❌  reject',
-          message: delay + ' ms',
-          icon: `❌`,
-          iconColor: 'red',
-        });
         console.log('reject');
         reject(delay);
       }
