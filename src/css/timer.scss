@@ -13,3 +13,8 @@
 .field .value {
   font-weight: 1000;
 }
+
+input:focus {
+  outline: transparent;
+  border-color: #4e75ff;
+}
